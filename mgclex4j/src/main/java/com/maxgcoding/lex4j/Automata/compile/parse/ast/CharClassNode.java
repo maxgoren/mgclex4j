@@ -1,0 +1,60 @@
+package com.maxgcoding.lex4j.Automata.compile.parse.ast;
+
+import com.maxgcoding.lex4j.Automata.compile.parse.AST;
+
+public class CharClassNode extends AST {
+    AST node;
+    private String ccl;
+    private Integer captureGroup;
+
+    @Override
+    public AST setGroup(Integer g) {
+        captureGroup = g;
+        return this;
+    }
+
+    @Override
+    public Integer getGroup() {
+        return captureGroup;
+    }
+
+    @Override
+    public AST getLeft() {
+        return node;
+    }
+
+    @Override
+    public AST getRight() {
+        return null;
+    }
+
+    @Override
+    public AST setLeft(AST l) {
+        this.node = l;
+        return this;
+    }
+
+    @Override
+    public AST setRight(AST r) {
+        return this;
+    }
+
+    @Override
+    public Character getData() {
+        return '[';
+    }
+
+    public AST setCcl(String data) {
+        ccl = data;
+        return this;
+    }
+
+    public String getCcl() {
+        return ccl;
+    }
+
+    @Override
+    public AST setData(Character ch) {
+        return this;
+    }
+}
