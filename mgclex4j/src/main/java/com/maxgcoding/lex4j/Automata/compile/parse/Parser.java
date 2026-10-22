@@ -28,7 +28,7 @@ public class Parser {
         try {
             t = expr();
         } catch (Exception e) {
-            System.out.println("Shit: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
             return null;
         }
         if (t != null) {
@@ -39,7 +39,6 @@ public class Parser {
 
     private void match(char c) throws MismatchedTokenException {
         if (expect(c)) {
-            System.out.println("Matched " + c);
             advance();
             return;
         }
@@ -144,7 +143,6 @@ private Boolean isOperator(char ch) {
         } else {
             lhs = new LiteralNode().setGroup(captureGroup);
             lhs.setData(lookahead());
-            System.out.println("Matched Literal: " + lookahead());
             advance();
         }
         return lhs;
@@ -195,7 +193,6 @@ private Boolean isOperator(char ch) {
             ConcatNode t = new ConcatNode();
             t.setLeft(lhs);
             t.setGroup(captureGroup);
-            System.out.println("Making Concat");
             t.setRight(term());
             lhs = t;
         }

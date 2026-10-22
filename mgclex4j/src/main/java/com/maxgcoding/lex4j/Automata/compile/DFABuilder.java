@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
-import java.util.stream.Collector;
 
 import com.maxgcoding.lex4j.Automata.AutomataState;
 import com.maxgcoding.lex4j.Automata.Closure;
@@ -66,7 +65,7 @@ public class DFABuilder {
            for (AutomataState nfs : state.getStates()) {
                 NFAState nf = (NFAState)nfs;
                 if (nf.getToken() > 0) {
-                    System.out.println("Marked " + state.getLabel() + " as accepting token " + nf.getToken());
+                    //System.out.println("Marked " + state.getLabel() + " as accepting token " + nf.getToken());
                     state.setAccept(Boolean.TRUE);
                     state.setToken(nf.getToken());
                     break;
@@ -126,7 +125,7 @@ public class DFABuilder {
                 if (dfa.getStates().get(os).isAccept()) {
                     result.getStates().get(i).setAccept(true);
                     result.getStates().get(i).setToken(dfa.getStates().get(os).getToken());
-                    System.out.println("And updated " + result.getStates().get(i).getLabel() + " as accepting token " + dfa.getStates().get(os).getToken());
+                    //System.out.println("And updated " + result.getStates().get(i).getLabel() + " as accepting token " + dfa.getStates().get(os).getToken());
                     break;
                 }
             }

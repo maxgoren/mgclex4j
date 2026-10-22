@@ -30,13 +30,13 @@ public class LexGen {
         List<NFAState> acceptStates = new ArrayList<>();
         for (TokenPatternRule rule : patternRules) {
             AST node = parser.parse(rule.getPattern());
-            PrettyPrint.traverse(node);
+            //PrettyPrint.traverse(node);
             NFA nfa = nfaBuilder.build(node);
             acceptStates.add(nfa.getAccept());
             final_nfa.getStart().addTransition(new EpsilonTransition(nfa.getStart()));
             nfa.getAccept().addTransition(new EpsilonTransition(final_nfa.getAccept()));
             nfa.getAccept().setToken(rule.getNumber());
-            System.out.println(nfa.getAccept().getLabel() + " should recognize rule " + rule.getNumber());
+            //System.out.println(nfa.getAccept().getLabel() + " should recognize rule " + rule.getNumber());
             final_expr.append(rule.getPattern()).append("|");
         }
         final_expr.setCharAt(final_expr.lastIndexOf("|"), ')');

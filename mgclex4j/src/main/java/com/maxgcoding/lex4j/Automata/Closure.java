@@ -63,13 +63,13 @@ public class Closure {
                     case EpsilonTransition _ -> { }
                     case CharacterTransition ct -> {
                         if (ct.match(c) && !next.contains(ct.getDestination())) {
-                            System.out.println(state.getLabel() + "-(" + ct.edgeLabel() + ")-> " + ct.getDestination().getLabel());
+                            //System.out.println(state.getLabel() + "-(" + ct.edgeLabel() + ")-> " + ct.getDestination().getLabel());
                             next.add(ct.getDestination());
                         }
                      }
                     case CharClassTransition ct -> {
                         if (ct.match(c) && !next.contains(ct.getDestination())) {
-                            System.out.println(state.getLabel() + "-(" + ct.edgeLabel() + ")-> " + ct.getDestination().getLabel());
+                            //System.out.println(state.getLabel() + "-(" + ct.edgeLabel() + ")-> " + ct.getDestination().getLabel());
                             next.add(ct.getDestination());
                         }
                     }
