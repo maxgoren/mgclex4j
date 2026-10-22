@@ -12,12 +12,12 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.release>24</maven.compiler.release>
+    <maven.compiler.release>25</maven.compiler.release>
   </properties>
 
   <distributionManagement>
     <repository>
-      <id>mgclex4j</id>
+      <id>github</id>
       <name>MaxGCoding Apache Maven Packages</name>
        <url>https://mvn.pkg.github.com/maxgoren/mgclex4j</url>
      </repository>
