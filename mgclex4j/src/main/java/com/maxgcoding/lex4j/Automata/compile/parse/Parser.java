@@ -53,7 +53,9 @@ public class Parser {
     private char lookahead() {
         return spos < current.length() ? current.charAt(spos):Character.MIN_VALUE;
     }
-
+    private char prev() {
+        return spos > 0 ? current.charAt(spos-1):current.charAt(spos);
+    }
     private void advance() {
             spos++;
     }
@@ -78,10 +80,10 @@ private Boolean isOperator(char ch) {
 }
 
     private Boolean isValLiteral(Character ch) {
-        if (Character.isLetterOrDigit(ch) || expect('.') || expect('[')|| expect('<'))
-            return true;
-        //return !isOperator(ch);
-        return false;
+        if (ch.equals(Character.MIN_VALUE)) {
+            return false;
+        }
+        return !isOperator(ch) || (isEscapeChar(prev()) && isOperator(ch)) || expect('[');
     }
 
     private Boolean isPerlEscape(Character c) {
@@ -155,6 +157,7 @@ private Boolean isOperator(char ch) {
                 case 'D' -> { lhs = new CharClassNode().setCcl("[0-9]"); }
                 case 'd' -> { lhs = new CharClassNode().setCcl("[A-Za-z]"); }
             }
+            advance();
         } else {
             advance();
             lhs = new LiteralNode();
