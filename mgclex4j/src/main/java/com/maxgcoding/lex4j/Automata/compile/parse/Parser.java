@@ -14,7 +14,6 @@ import com.maxgcoding.lex4j.Automata.compile.parse.ast.StarClosureNode;
 public class Parser {
     private String current;
     private int spos;
-    private int captureGroup;
     
     public Parser() {
         
@@ -23,16 +22,12 @@ public class Parser {
     public AST parse(String rexpr) {
         current = rexpr;
         spos = 0;
-        captureGroup = 0 ;
         AST t = null;
         try {
             t = expr();
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             return null;
-        }
-        if (t != null) {
-            t.setGroup(0);
         }
         return new CharClassNode().setCcl(rexpr).setLeft(t);
     }
@@ -104,11 +99,6 @@ private Boolean isOperator(char ch) {
             char op = lookahead();
             match(op);
             OperatorNode n = null;
-            Boolean isLazy = Boolean.FALSE;
-            if (expect('?')) {
-                isLazy = Boolean.TRUE;
-                match('?');
-            }
             switch (op) {
                case '*' -> {
                    n = new StarClosureNode();
@@ -121,10 +111,10 @@ private Boolean isOperator(char ch) {
                }
                default -> throw new InvalidOperatorException("Invalid Operator: %s".formatted(op));
             }
-            n.setLeft(lhs);
-            n.setLazy(isLazy);
-            n.setGroup(captureGroup);
-            lhs = n;
+            if (n != null) {
+                n.setLeft(lhs);
+                lhs = n;
+            }
         }
         return lhs;
     }
@@ -139,9 +129,9 @@ private Boolean isOperator(char ch) {
                 match(lookahead());
             }
             match(']');
-            lhs = new CharClassNode().setCcl(data.toString()).setGroup(captureGroup);
+            lhs = new CharClassNode().setCcl(data.toString());
         } else {
-            lhs = new LiteralNode().setGroup(captureGroup);
+            lhs = new LiteralNode();
             lhs.setData(lookahead());
             advance();
         }
@@ -162,20 +152,15 @@ private Boolean isOperator(char ch) {
             lhs.setData(lookahead());
             advance();
         }
-        if (lhs != null) {
-            lhs.setGroup(captureGroup);
-        }
         return lhs;
     }
 
     private AST factor() throws MismatchedTokenException {
         AST lhs = null;
         if (expect('(')) {
-            captureGroup++;
             match('(');
             lhs = expr();
             match(')');
-            captureGroup--;
         } else if (isEscapeChar(lookahead())) {
             lhs = parseEscapeChars();
         } else if (isValLiteral(lookahead())) {
@@ -192,7 +177,6 @@ private Boolean isOperator(char ch) {
         if (expect('(') || isValLiteral(lookahead()) || isEscapeChar(lookahead())) {
             ConcatNode t = new ConcatNode();
             t.setLeft(lhs);
-            t.setGroup(captureGroup);
             t.setRight(term());
             lhs = t;
         }
@@ -204,7 +188,6 @@ private Boolean isOperator(char ch) {
         if (expect('|')) {
             match('|');
             OrNode t = new OrNode();
-            t.setGroup(captureGroup);
             t.setLeft(lhs);
             t.setRight(expr());
             lhs = t;

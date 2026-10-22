@@ -26,7 +26,6 @@ public class App {
         List<MatchResult> tokens = lexer.lex(ex);
         for (MatchResult mr : tokens) {
             System.out.println(mr.getMatch() + " matched by " + rules.get(mr.tokenNumber()-1).getToken());
-
         }
     }
 }

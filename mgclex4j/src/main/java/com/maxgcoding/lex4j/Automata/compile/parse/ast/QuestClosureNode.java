@@ -5,18 +5,6 @@ import com.maxgcoding.lex4j.Automata.compile.parse.AST;
 public class QuestClosureNode extends OperatorNode {
     private AST left;
     private AST right;
-    private Integer captureGroup;
-
-    @Override
-    public AST setGroup(Integer g) {
-        captureGroup = g;
-        return this;
-    }
-
-    @Override
-    public Integer getGroup() {
-        return captureGroup;
-    }
     
     @Override
     public AST getLeft() {

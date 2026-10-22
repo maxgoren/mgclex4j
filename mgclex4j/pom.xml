@@ -8,13 +8,20 @@
   <version>1.0-SNAPSHOT</version>
 
   <name>mgclex4j</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>http://www.maxgcoding.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.release>25</maven.compiler.release>
+    <maven.compiler.release>24</maven.compiler.release>
   </properties>
+
+  <distributionManagement>
+    <repository>
+      <id>mgclex4j</id>
+      <name>MaxGCoding Apache Maven Packages</name>
+       <url>https://mvn.pkg.github.com/maxgoren/mgclex4j</url>
+     </repository>
+  </distributionManagement>
 
   <dependencyManagement>
     <dependencies>
@@ -40,13 +47,7 @@
       <artifactId>junit-jupiter-params</artifactId>
       <scope>test</scope>
     </dependency>
-  </dependencies>
-  <dependency>
-    <groupId>org.projectlombok</groupId>
-    <artifactId>lombok</artifactId>
-    <version>1.18.30</version>
-    <scope>provided</scope>
-  </dependency>
+    </dependencies>
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
