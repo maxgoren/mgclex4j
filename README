@@ -1,0 +1,7 @@
+# MGCLex4j
+This is a Lexer Generator, similar to mgclex though this is intended to be used
+as a dependncy injected java library instead of mgclex's static C header file output.
+
+## Any Other Differences From mgclex?
+The choice of algorithm. while the C based generator uses the Aho, Sethi, Ullman Direct DFA construction
+this version uses the traditional Thompsons Construction NFA -> DFA route.

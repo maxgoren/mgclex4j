@@ -3,6 +3,7 @@ package com.maxgcoding.lex4j.Generator;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.maxgcoding.lex4j.Analyzer.Lexer;
 import com.maxgcoding.lex4j.Automata.DFA;
 import com.maxgcoding.lex4j.Automata.NFA;
 import com.maxgcoding.lex4j.Automata.States.NFAState;
@@ -23,19 +24,24 @@ public class LexGen {
         nfaBuilder = new NFABuilder();
         dfaBuilder = new DFABuilder();
     }
-    public DFA generate(List<TokenPatternRule> patternRules) {
+    public Lexer generate(List<TokenPatternRule> patternRules) {
         NFA final_nfa = new NFA(new NFAState(1000), new NFAState(1001));
         StringBuilder final_expr = new StringBuilder();
         List<NFAState> acceptStates = new ArrayList<>();
         for (TokenPatternRule rule : patternRules) {
-            NFA nfa = nfaBuilder.build(parser.parse(rule.getPattern()));
+            AST node = parser.parse(rule.getPattern());
+            PrettyPrint.traverse(node);
+            NFA nfa = nfaBuilder.build(node);
             acceptStates.add(nfa.getAccept());
             final_nfa.getStart().addTransition(new EpsilonTransition(nfa.getStart()));
             nfa.getAccept().addTransition(new EpsilonTransition(final_nfa.getAccept()));
+            nfa.getAccept().setToken(rule.getNumber());
+            System.out.println(nfa.getAccept().getLabel() + " should recognize rule " + rule.getNumber());
             final_expr.append(rule.getPattern()).append("|");
         }
         final_expr.setCharAt(final_expr.lastIndexOf("|"), ')');
-        return buildDFA(final_nfa, final_expr.toString());
+        DFA dfa = buildDFA(final_nfa, final_expr.toString());
+        return new Lexer(dfa, patternRules);
     }
     public DFA generate(String expr) {
         return buildDFA(buildNFA(expr), expr);

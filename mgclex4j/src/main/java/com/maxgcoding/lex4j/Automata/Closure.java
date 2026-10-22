@@ -31,7 +31,6 @@ public class Closure {
     }
 
     public Set<AutomataState> e_closure(Set<AutomataState> states) {
-        System.out.println("epsilon closure: ");
         Set<AutomataState> next = new HashSet<>();
         Stack<AutomataState> st = new Stack<>();
         states.forEach(state -> {next.add(state); st.add(state); });
@@ -41,7 +40,7 @@ public class Closure {
                 switch (trans) {
                     case EpsilonTransition ct -> {
                         if (!next.contains(ct.getDestination())) {
-                            System.out.println(currState.getLabel() + "-(" + ct.edgeLabel() + ")-> " + ct.getDestination().getLabel());
+                            //System.out.println(currState.getLabel() + "-(" + ct.edgeLabel() + ")-> " + ct.getDestination().getLabel());
                             next.add(ct.getDestination());
                             st.push(ct.getDestination());
                         }
@@ -52,14 +51,12 @@ public class Closure {
                 }
             }
         }
-        System.out.println("=====================");
         return next;
     }
 
 
     public Set<AutomataState> move(Character c, Set<AutomataState> states) {
         Set<AutomataState> next = new HashSet<>();
-        System.out.println("Move on " + c);
         for (AutomataState state : states) {
             for (Transition trans : state.getTrans()) {
                 switch (trans) {
@@ -80,7 +77,6 @@ public class Closure {
                 }
             }
         }
-        System.out.println("---------------------");
         return next;
     }
 }

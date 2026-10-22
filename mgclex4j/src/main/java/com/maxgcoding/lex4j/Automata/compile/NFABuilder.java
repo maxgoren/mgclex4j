@@ -31,6 +31,8 @@ public class NFABuilder {
 
     public NFA build(AST node) {
         compile(node.getLeft());
+        if (st.isEmpty())
+            return null;
         return st.pop();
     }
 

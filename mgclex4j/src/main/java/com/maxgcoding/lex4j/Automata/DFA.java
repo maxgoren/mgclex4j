@@ -16,4 +16,19 @@ public class DFA {
     public DFAState getStart() {
         return states.get(0);
     }
+    public MatchResult match(String text) {
+        DFAState s = getStart();
+        String matched = null;
+        int matchedBy = -1;
+        for (int i = 0; i < text.length(); i++) {
+            s = s.transOn(text.charAt(i));
+            if (s == null) {
+                break;
+            } else if (s.isAccept()) {
+                matched = text.substring(0, i+1);
+                matchedBy = s.getToken();
+            }
+        }
+        return new MatchResult(matched, matchedBy);
+    }
 }

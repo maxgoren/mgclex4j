@@ -24,14 +24,16 @@ public class Parser {
         current = rexpr;
         spos = 0;
         captureGroup = 0 ;
-        AST t;
+        AST t = null;
         try {
             t = expr();
         } catch (Exception e) {
             System.out.println("Shit: " + e.getMessage());
             return null;
         }
-        t.setGroup(0);
+        if (t != null) {
+            t.setGroup(0);
+        }
         return new CharClassNode().setCcl(rexpr).setLeft(t);
     }
 
@@ -60,14 +62,32 @@ public class Parser {
         spos--;
     }
 
+private Boolean isOperator(char ch) {
+    switch (ch) {
+        case '[':
+        case ']':
+        case '(':
+        case ')':
+        case '+':
+        case '*':
+        case '?':
+        case '|':
+            return true;
+    }
+    return false;
+}
+
     private Boolean isValLiteral(Character ch) {
-        return Character.isAlphabetic(ch) || Character.isDigit(ch) || expect('.') || expect('[');
+        if (Character.isLetterOrDigit(ch) || expect('.') || expect('[')|| expect('<'))
+            return true;
+        //return !isOperator(ch);
+        return false;
     }
 
     private Boolean isPerlEscape(Character c) {
         if (isEscapeChar(c)) {
             advance();
-            if (c.equals('d') || c.equals('s') || c.equals('w'))
+            if (c.equals('d') || c.equals('D') || c.equals('s') || c.equals('w'))
                 return true;
         }
         rewind();
@@ -139,6 +159,7 @@ public class Parser {
             advance();
             lhs = new LiteralNode();
             lhs.setData(lookahead());
+            advance();
         }
         if (lhs != null) {
             lhs.setGroup(captureGroup);

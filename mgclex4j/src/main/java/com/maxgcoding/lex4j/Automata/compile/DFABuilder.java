@@ -60,9 +60,11 @@ public class DFABuilder {
         for (DFAState state : result.getStates()) {
            for (AutomataState nfs : state.getStates()) {
                 NFAState nf = (NFAState)nfs;
-                if (nfa.getAccept().equals(nf)) {
-                    System.out.println("Marked " + state.getLabel() + " as accepting.");
+                if (nf.getToken() > 0) {
+                    System.out.println("Marked " + state.getLabel() + " as accepting token " + nf.getToken());
                     state.setAccept(Boolean.TRUE);
+                    state.setToken(nf.getToken());
+                    break;
                 }
             }
         }

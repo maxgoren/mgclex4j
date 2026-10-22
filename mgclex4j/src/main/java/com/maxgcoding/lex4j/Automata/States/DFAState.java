@@ -10,22 +10,18 @@ import com.maxgcoding.lex4j.Automata.Transition;
 
 public class DFAState implements AutomataState {
     private Set<AutomataState> nfastates;
-    private boolean accepts;
     private int label;
     private List<Transition> transitions;
+    private int tokenNumber;
+    private boolean acceptState;
     public DFAState(int label) {
         this.label = label;
         this.nfastates = new HashSet<>();
+        this.acceptState = false;
         transitions = new ArrayList<>();
     }
     public int getLabel() {
         return label;
-    }
-    public void setAccept(Boolean accept) {
-        this.accepts = accept;
-    }
-    public Boolean getAccepts() {
-        return accepts;
     }
     public Set<AutomataState> getStates() {
         return nfastates;
@@ -39,10 +35,21 @@ public class DFAState implements AutomataState {
     public DFAState transOn(Character ch) {
         for (Transition t : transitions) {
             if (t.match(ch)) {
-                System.out.println("Transition on " + t.edgeLabel());
                 return (DFAState) t.getDestination();
             }
         }
         return null;
+    }
+    public void setAccept(Boolean accept) {
+        acceptState = accept;
+    }
+    public boolean isAccept() {
+        return acceptState;
+    }
+    public void setToken(int tn) {
+        tokenNumber = tn;
+    }
+    public int getToken() {
+        return tokenNumber;
     }
 }
