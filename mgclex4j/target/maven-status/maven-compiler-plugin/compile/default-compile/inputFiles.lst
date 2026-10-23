@@ -1,7 +1,4 @@
-/home/max/mgclex4j/mgclex4j/src/main/java/com/maxgcoding/RDParser.java
-/home/max/mgclex4j/mgclex4j/src/main/java/com/maxgcoding/SyntaxNode.java
 /home/max/mgclex4j/mgclex4j/src/main/java/com/maxgcoding/lex4j/Analyzer/Lexer.java
-/home/max/mgclex4j/mgclex4j/src/main/java/com/maxgcoding/lex4j/App.java
 /home/max/mgclex4j/mgclex4j/src/main/java/com/maxgcoding/lex4j/Automata/AutomataState.java
 /home/max/mgclex4j/mgclex4j/src/main/java/com/maxgcoding/lex4j/Automata/Closure.java
 /home/max/mgclex4j/mgclex4j/src/main/java/com/maxgcoding/lex4j/Automata/DFA.java
