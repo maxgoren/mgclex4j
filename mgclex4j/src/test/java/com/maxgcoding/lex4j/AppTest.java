@@ -1,10 +1,8 @@
 package com.maxgcoding.lex4j;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import com.maxgcoding.lex4j.Analyzer.Lexer;
@@ -31,7 +29,7 @@ public class AppTest {
                                           new TokenPatternRule("[(]","LPAR", 6), 
                                           new TokenPatternRule("[)]","RPAR", 7), 
                                           new TokenPatternRule("<","LESS",8) );
-        LexGen gen = new LexGen();
+        LexGen gen = new LexGen(Boolean.FALSE);
         Lexer lexer = gen.generate(rules);
         String ex = "if (1 + 1 < 5) print 42";
         List<MatchResult> tokens = lexer.lex(ex);
