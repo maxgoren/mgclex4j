@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.maxgcoding.lex4j.Automata.DFA;
-import com.maxgcoding.lex4j.Automata.MatchResult;
 import com.maxgcoding.lex4j.Automata.States.DFAState;
 import com.maxgcoding.lex4j.Automata.Transition;
 import com.maxgcoding.lex4j.Input.TokenPatternRule;
@@ -25,12 +24,12 @@ public class Lexer {
                 dtrans[i][j] = -1;
         }
         for (DFAState state : dfa.getStates()) {
-            System.out.print(state.getLabel() + ": ");
+            //System.out.print(state.getLabel() + ": ");
             for (Transition t : state.getTrans()) {
                 dtrans[state.getLabel()][t.edgeLabel()] = t.getDestination().getLabel();
-                System.out.print(t.edgeLabel() + "(" + t.getDestination().getLabel() + ")");
+                //System.out.print(t.edgeLabel() + "(" + t.getDestination().getLabel() + ")");
             }
-            System.out.println(", Accepts: " + (state.isAccept() ? state.getToken():-1));
+            //System.out.println(", Accepts: " + (state.isAccept() ? state.getToken():-1));
             accept[state.getLabel()] = state.isAccept() ? state.getToken():-1;
         }
     }
@@ -61,6 +60,6 @@ public class Lexer {
         }
         if (matched == null)
             return null;
-        return new MatchResult(matched, matchedBy);
+        return new MatchResult(matched, rules.get(matchedBy).getToken());
     }
 }

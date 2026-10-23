@@ -1,4 +1,6 @@
 C:\Users\mgoren\regex\mgclex4j\mgclex4j\src\main\java\com\maxgcoding\lex4j\Analyzer\Lexer.java
+C:\Users\mgoren\regex\mgclex4j\mgclex4j\src\main\java\com\maxgcoding\lex4j\Analyzer\MatchResult.java
+C:\Users\mgoren\regex\mgclex4j\mgclex4j\src\main\java\com\maxgcoding\lex4j\Analyzer\Token.java
 C:\Users\mgoren\regex\mgclex4j\mgclex4j\src\main\java\com\maxgcoding\lex4j\App.java
 C:\Users\mgoren\regex\mgclex4j\mgclex4j\src\main\java\com\maxgcoding\lex4j\Automata\AutomataState.java
 C:\Users\mgoren\regex\mgclex4j\mgclex4j\src\main\java\com\maxgcoding\lex4j\Automata\Closure.java
@@ -18,7 +20,6 @@ C:\Users\mgoren\regex\mgclex4j\mgclex4j\src\main\java\com\maxgcoding\lex4j\Autom
 C:\Users\mgoren\regex\mgclex4j\mgclex4j\src\main\java\com\maxgcoding\lex4j\Automata\compile\parse\Parser.java
 C:\Users\mgoren\regex\mgclex4j\mgclex4j\src\main\java\com\maxgcoding\lex4j\Automata\compile\parse\PrettyPrint.java
 C:\Users\mgoren\regex\mgclex4j\mgclex4j\src\main\java\com\maxgcoding\lex4j\Automata\DFA.java
-C:\Users\mgoren\regex\mgclex4j\mgclex4j\src\main\java\com\maxgcoding\lex4j\Automata\MatchResult.java
 C:\Users\mgoren\regex\mgclex4j\mgclex4j\src\main\java\com\maxgcoding\lex4j\Automata\NFA.java
 C:\Users\mgoren\regex\mgclex4j\mgclex4j\src\main\java\com\maxgcoding\lex4j\Automata\States\DFAState.java
 C:\Users\mgoren\regex\mgclex4j\mgclex4j\src\main\java\com\maxgcoding\lex4j\Automata\States\NFAState.java
