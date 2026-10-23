@@ -19,7 +19,7 @@
     <repository>
       <id>github</id>
       <name>Github Packages</name>
-       <url>https://mvn.pkg.github.com/maxgoren/mgclex4j</url>
+       <url>https://maven.pkg.github.com/maxgoren/mgclex4j</url>
      </repository>
   </distributionManagement>
 

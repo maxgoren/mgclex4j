@@ -1,14 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.maxgcoding.lex4j.AppTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.586 s <<< FAILURE! -- in com.maxgcoding.lex4j.AppTest
-com.maxgcoding.lex4j.AppTest.shouldAnswerWithTrue -- Time elapsed: 0.330 s <<< ERROR!
-java.lang.Error: 
-Unresolved compilation problem: 
-	Bolean cannot be resolved to a variable
-
-	at com.maxgcoding.lex4j.AppTest.shouldAnswerWithTrue(AppTest.java:34)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
-
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.166 s -- in com.maxgcoding.lex4j.AppTest

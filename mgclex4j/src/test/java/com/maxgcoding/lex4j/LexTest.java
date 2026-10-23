@@ -13,7 +13,7 @@ import com.maxgcoding.lex4j.Input.TokenPatternRule;
 /**
  * Unit test for simple App.
  */
-public class AppTest {
+public class LexTest {
 
     /**
      * Rigorous Test :-)
