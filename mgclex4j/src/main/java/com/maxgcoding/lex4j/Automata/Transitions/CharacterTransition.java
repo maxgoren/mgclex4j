@@ -18,7 +18,7 @@ public class CharacterTransition implements Transition {
     public Boolean match(Character ch) {
         return label.equals(ch);
     }
-    public String edgeLabel() {
-        return label.toString();
+    public Character edgeLabel() {
+        return label;
     }
 }

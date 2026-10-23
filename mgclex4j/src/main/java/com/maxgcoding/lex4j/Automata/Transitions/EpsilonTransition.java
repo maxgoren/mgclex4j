@@ -14,7 +14,7 @@ public class EpsilonTransition implements Transition {
     public Boolean match(Character ch) {
         return false;
     }
-    public String edgeLabel() {
-        return "&";
+    public Character edgeLabel() {
+        return '&';
     }
 }

@@ -10,6 +10,7 @@ public class DFA {
     public DFA() {
         states = new ArrayList<>();
     }
+    
     public List<DFAState> getStates() {
         return states;
     }
@@ -29,6 +30,8 @@ public class DFA {
                 matchedBy = s.getToken();
             }
         }
+        if (matched == null)
+            return null;
         return new MatchResult(matched, matchedBy);
     }
 }

@@ -18,9 +18,9 @@ import com.maxgcoding.lex4j.Automata.States.NFAState;
 import com.maxgcoding.lex4j.Automata.Transitions.CharacterTransition;
 
 public class DFABuilder {
-    
-    public DFABuilder() {
-
+    private final Boolean makeMin;
+    public DFABuilder(Boolean minimizeFinal) {
+        this.makeMin = minimizeFinal;
     }
     
     private DFAState findStatByPositions(DFA dfa, Set<AutomataState> positions) {
@@ -65,14 +65,13 @@ public class DFABuilder {
            for (AutomataState nfs : state.getStates()) {
                 NFAState nf = (NFAState)nfs;
                 if (nf.getToken() > 0) {
-                    //System.out.println("Marked " + state.getLabel() + " as accepting token " + nf.getToken());
                     state.setAccept(Boolean.TRUE);
                     state.setToken(nf.getToken());
                     break;
                 }
             }
         }
-        return minimize(result,alpha);
+        return makeMin ? minimize(result,alpha):result;
     }
 
     DFA minimize(DFA dfa, Set<Character> alphabet) {
@@ -112,6 +111,7 @@ public class DFABuilder {
         for (int i = 0; i < groups.size(); i++) {
             result.getStates().add(new DFAState(i));
             result.getStates().get(i).setAccept(false);
+            result.getStates().get(i).setToken(-1);
         }
         for (int i = 0; i < groups.size(); i++) {
             int rep = groups.get(i).stream().limit(1).toList().getFirst();
@@ -121,14 +121,23 @@ public class DFABuilder {
                     result.getStates().get(i).addTransition(new CharacterTransition(c, state));
                 }
             }
-            for (int os : groups.get(i)) {
+        }
+        int i = 0;
+        for (Set<Integer> group : groups) {
+            for (int os : group) {
                 if (dfa.getStates().get(os).isAccept()) {
-                    result.getStates().get(i).setAccept(true);
-                    result.getStates().get(i).setToken(dfa.getStates().get(os).getToken());
-                    //System.out.println("And updated " + result.getStates().get(i).getLabel() + " as accepting token " + dfa.getStates().get(os).getToken());
-                    break;
+                    if (!result.getStates().get(i).isAccept()) {
+                        result.getStates().get(i).setAccept(true);
+                        result.getStates().get(i).setToken(dfa.getStates().get(os).getToken());
+                        //System.out.println("And updated " + result.getStates().get(i).getLabel() + " as accepting token " + dfa.getStates().get(os).getToken());
+                    } else {
+                        if (dfa.getStates().get(os).getToken() < result.getStates().get(i).getToken()) {
+                            result.getStates().get(i).setToken(dfa.getStates().get(os).getToken());
+                        }
+                    }
                 }
             }
+            i++;
         }
         return result;
     }

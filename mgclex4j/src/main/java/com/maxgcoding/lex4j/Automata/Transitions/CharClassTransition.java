@@ -24,7 +24,7 @@ public class CharClassTransition implements Transition {
         }
         return false;
     }
-    public String edgeLabel() {
-        return label;
+    public Character edgeLabel() {
+        return label.charAt(0);
     }
 }
