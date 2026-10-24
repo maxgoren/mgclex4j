@@ -22,18 +22,21 @@ public class LexTest {
     @Test
     public void shouldAnswerWithTrue() {
         List<TokenPatternRule> rules = List.of(
-                                          new TokenPatternRule("([A-Za-z][A-Za-z0-9]*)", Token.define("ID")),
                                           new TokenPatternRule("([0-9]+)", Token.define("NUMBER")), 
                                           new TokenPatternRule("if", Token.define("IF")), 
                                           new TokenPatternRule("print", Token.define("PRINT")), 
                                           new TokenPatternRule("[+]",Token.define("PLUS")), 
                                           new TokenPatternRule("[(]",Token.define("LPAR")), 
                                           new TokenPatternRule("[)]",Token.define("RPAR")), 
-                                          new TokenPatternRule("<",Token.define("LESS")) );
+                                          new TokenPatternRule("<",Token.define("LESS")),
+                                         new TokenPatternRule("([a-z]|[A-Z])+", Token.define("ID")) );
         LexGen gen = new LexGen(Boolean.FALSE);
         Lexer lexer = gen.generate(rules);
-        String ex = "if (1 + 1 < 5) print 42";
+        String ex = "if (1 + 1 < 5) print qq";
         List<MatchResult> tokens = lexer.lex(ex);
+        for (MatchResult mr : tokens) {
+            System.out.println(mr.getToken() + " : " + mr.getMatch());
+        }
         assertEquals(tokens.size(), 10);
     }
 }

@@ -18,7 +18,7 @@ public class Token {
     public static synchronized Token define(String name) {
         if (REGISTRY.containsKey(name))
             return REGISTRY.get(name);
-        Token nt = new Token(name, REGISTRY.size());
+        Token nt = new Token(name, REGISTRY.size()+1);
         REGISTRY.put(name, nt);
         return nt;
     }

@@ -30,7 +30,7 @@ public class Lexer {
                 //System.out.print(t.edgeLabel() + "(" + t.getDestination().getLabel() + ")");
             }
             //System.out.println(", Accepts: " + (state.isAccept() ? state.getToken():-1));
-            accept[state.getLabel()] = state.isAccept() ? state.getToken():-1;
+            accept[state.getLabel()] = state.isAccept() ? state.getToken()-1:-1;
         }
     }
     public List<MatchResult> lex(String input) {
